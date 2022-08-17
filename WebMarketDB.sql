@@ -51,6 +51,14 @@ CREATE TABLE IF NOT EXISTS animal (
     PRIMARY KEY (a_id)
 )  DEFAULT CHARSET=UTF8;
 
+CREATE TABLE animal2 (
+    num INT NOT NULL AUTO_INCREMENT,
+    id VARCHAR(10) NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    age INTEGER,
+    PRIMARY KEY (num)
+)  DEFAULT CHARSET=UTF8;
+
 CREATE TABLE animalMember (
     id VARCHAR(10) NOT NULL,
     password VARCHAR(10) NOT NULL,
@@ -77,9 +85,16 @@ INSERT INTO product VALUES('P1234', 'iPhone 6s', 800000, '1334X750 Renina HD dis
 INSERT INTO product VALUES('P1235', 'LG PC gram', 1500000, '3.3-inch,IPS LED display, 5rd Generation Intel Core processors', 'Notebook', 'LG', 1000, 'new', 'P1235.png');
 INSERT INTO product VALUES('P1236', 'Galaxy Tab S', 900000, '3.3-inch, 212.8*125.6*6.6mm,  Super AMOLED display, Octa-Core processor', 'Tablet', 'Samsung', 1000, 'new', 'P1236.png');
 
+INSERT INTO animal2(id, name, age) values('B001', '개', '2');
+INSERT INTO animal2(id, name, age) values('B002', '고양이', '4');
+INSERT INTO animal2(id, name, age) values('B003', '햄스터', '1');
+
 SELECT * FROM board;
 SELECT * FROM member;
 SELECT * FROM product;
 SELECT * FROM animal;
+SELECT * FROM animal2;
 SELECT * FROM animalMember;
 SELECT * FROM memberjsp;
+SELECT count(*) FROM board;
+SELECT count(*) FROM board WHERE content LIKE '%내용%';
