@@ -1,4 +1,4 @@
--- À¯Àú Å×ÀÌºí
+-- ìœ ì € í…Œì´ë¸”
 CREATE TABLE bm_user (
     id       NUMBER PRIMARY KEY,
     username VARCHAR2(100) NOT NULL,
@@ -11,14 +11,14 @@ CREATE TABLE bm_user (
     role     VARCHAR2(20) DEFAULT 'ROLE_USER'
 );
 
--- À¯Àú ¹øÈ£ ÀÚµ¿Áõ°¡    
+-- ìœ ì € ë²ˆí˜¸ ìë™ì¦ê°€    
 CREATE SEQUENCE user_id_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 99999999999 NOCYCLE NOCACHE NOORDER;
 
 
 
 
 
--- °¡°Ô Å×ÀÌºí
+-- ê°€ê²Œ í…Œì´ë¸”
 CREATE TABLE bm_store (
     id             NUMBER PRIMARY KEY,
     category       NUMBER NOT NULL,
@@ -34,17 +34,17 @@ CREATE TABLE bm_store (
     min_delevery   NUMBER DEFAULT 0,
     delevery_time  NUMBER DEFAULT 0,
     delevery_tip   NUMBER DEFAULT 0,
-    store_des      VARCHAR2(1000) DEFAULT '°¡°Ô¼Ò°³°¡ ¾ø½À´Ï´Ù'
+    store_des      VARCHAR2(1000) DEFAULT 'ê°€ê²Œì†Œê°œê°€ ì—†ìŠµë‹ˆë‹¤'
 );
 
--- °¡°Ô ¹øÈ£ ÀÚµ¿Áõ°¡
+-- ê°€ê²Œ ë²ˆí˜¸ ìë™ì¦ê°€
 CREATE SEQUENCE store_id_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 99999999999 NOCYCLE NOCACHE NOORDER;
 
 
 
 
 
--- À½½Ä Å×ÀÌºí
+-- ìŒì‹ í…Œì´ë¸”
 CREATE TABLE bm_food (
     id         NUMBER PRIMARY KEY,
     store_id   NUMBER NOT NULL,
@@ -55,10 +55,10 @@ CREATE TABLE bm_food (
     food_thumb VARCHAR2(200)
 );
 
--- À½½Ä ¹øÈ£ ÀÚµ¿Áõ°¡
+-- ìŒì‹ ë²ˆí˜¸ ìë™ì¦ê°€
 CREATE SEQUENCE food_id_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 99999999999 NOCYCLE NOCACHE NOORDER;
 
--- ¿Ü·¡Å° ÁöÁ¤
+-- ì™¸ë˜í‚¤ ì§€ì •
 ALTER TABLE bm_food
     ADD CONSTRAINT food FOREIGN KEY ( store_id )
         REFERENCES bm_store ( id )
@@ -68,7 +68,7 @@ ALTER TABLE bm_food
 
 
 
--- À½½Ä Ãß°¡¿É¼Ç Å×ÀÌºí
+-- ìŒì‹ ì¶”ê°€ì˜µì…˜ í…Œì´ë¸”
 CREATE TABLE bm_food_option (
     id           NUMBER PRIMARY KEY,
     food_id      NUMBER NOT NULL,
@@ -76,10 +76,10 @@ CREATE TABLE bm_food_option (
     option_price NUMBER NOT NULL
 );
 
--- À½½Ä Ãß°¡¿É¼Ç ÀÚµ¿Áõ°¡
+-- ìŒì‹ ì¶”ê°€ì˜µì…˜ ìë™ì¦ê°€
 CREATE SEQUENCE option_id_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 99999999999 NOCYCLE NOCACHE NOORDER;
 
--- ¿Ü·¡Å° ÁöÁ¤
+-- ì™¸ë˜í‚¤ ì§€ì •
 ALTER TABLE bm_food_option
     ADD CONSTRAINT food_option FOREIGN KEY ( food_id )
         REFERENCES bm_food ( id )
@@ -89,14 +89,14 @@ ALTER TABLE bm_food_option
 
 
 
--- È¸¿ø ÁÖ¹®Á¤º¸ Å×ÀÌºí
+-- íšŒì› ì£¼ë¬¸ì •ë³´ í…Œì´ë¸”
 CREATE TABLE bm_order_user (
     order_num         NUMBER PRIMARY KEY,
     store_id          NUMBER NOT NULL,
     user_id           NUMBER NOT NULL,
     order_date        TIMESTAMP DEFAULT sysdate,
     pay_method        VARCHAR2(30),
-    delevery_status   VARCHAR2(50) DEFAULT 'ÁÖ¹®Á¢¼ö ´ë±â Áß',
+    delevery_status   VARCHAR2(50) DEFAULT 'ì£¼ë¬¸ì ‘ìˆ˜ ëŒ€ê¸° ì¤‘',
     phone             VARCHAR2(20) NOT NULL,
     delevery_address1 NUMBER NOT NULL,
     delevery_address2 VARCHAR2(200) NOT NULL,
@@ -104,20 +104,20 @@ CREATE TABLE bm_order_user (
     total_price       NUMBER NOT NULL,
     used_point        NUMBER DEFAULT 0,
     request           VARCHAR2(2000),
-    imp_uid           VARCHAR2(30) -- ¾ÆÀÓÆ÷Æ® °áÁ¦¹øÈ£
+    imp_uid           VARCHAR2(30) -- ì•„ì„í¬íŠ¸ ê²°ì œë²ˆí˜¸
 );
 
 
 
 
 
--- È¸¿ø »ó¼¼ÁÖ¹®Á¤º¸ Å×ÀÌºí
+-- íšŒì› ìƒì„¸ì£¼ë¬¸ì •ë³´ í…Œì´ë¸”
 CREATE TABLE bm_order_detail_user (
     order_num NUMBER,
     food_info VARCHAR2(2000)
 );
 
--- ¿Ü·¡Å° ÁöÁ¤
+-- ì™¸ë˜í‚¤ ì§€ì •
 ALTER TABLE bm_order_detail_user
     ADD CONSTRAINT order_detail_user FOREIGN KEY ( order_num )
         REFERENCES bm_order_user ( order_num )
@@ -127,14 +127,14 @@ ALTER TABLE bm_order_detail_user
 
 
 
--- ºñÈ¸¿ø ÁÖ¹®Á¤º¸ Å×ÀÌºí (È¸¿ø/ºñÈ¸¿ø union all ÇÏ±âÀ§ÇØ user_id ÄÃ·³ Ãß°¡)
+-- ë¹„íšŒì› ì£¼ë¬¸ì •ë³´ í…Œì´ë¸” (íšŒì›/ë¹„íšŒì› union all í•˜ê¸°ìœ„í•´ user_id ì»¬ëŸ¼ ì¶”ê°€)
 CREATE TABLE bm_order_non_user (
     order_num         NUMBER PRIMARY KEY,
     store_id          NUMBER NOT NULL,
     user_id           NUMBER NOT NULL,
     order_date        TIMESTAMP DEFAULT sysdate,
     pay_method        VARCHAR2(30),
-    delevery_status   VARCHAR2(50) DEFAULT 'ÁÖ¹®Á¢¼ö ´ë±â Áß',
+    delevery_status   VARCHAR2(50) DEFAULT 'ì£¼ë¬¸ì ‘ìˆ˜ ëŒ€ê¸° ì¤‘',
     phone             VARCHAR2(20) NOT NULL,
     delevery_address1 NUMBER NOT NULL,
     delevery_address2 VARCHAR2(200) NOT NULL,
@@ -142,20 +142,20 @@ CREATE TABLE bm_order_non_user (
     total_price       NUMBER NOT NULL,
     used_point        NUMBER DEFAULT 0,
     request           VARCHAR2(2000),
-    imp_uid           VARCHAR2(30) -- ¾ÆÀÓÆ÷Æ® °áÁ¦¹øÈ£
+    imp_uid           VARCHAR2(30) -- ì•„ì„í¬íŠ¸ ê²°ì œë²ˆí˜¸
 );
 
 
 
 
 
--- ºñÈ¸¿ø »ó¼¼ÁÖ¹®Á¤º¸ Å×ÀÌºí
+-- ë¹„íšŒì› ìƒì„¸ì£¼ë¬¸ì •ë³´ í…Œì´ë¸”
 CREATE TABLE bm_order_detail_non_user (
     order_num NUMBER,
     food_info VARCHAR2(2000)
 );
 
--- ¿Ü·¡Å° ÁöÁ¤
+-- ì™¸ë˜í‚¤ ì§€ì •
 ALTER TABLE bm_order_detail_non_user
     ADD CONSTRAINT order_detail_non_user FOREIGN KEY ( order_num )
         REFERENCES bm_order_non_user ( order_num )
@@ -165,7 +165,7 @@ ALTER TABLE bm_order_detail_non_user
 
 
 
--- Æ÷ÀÎÆ® Å×ÀÌºí
+-- í¬ì¸íŠ¸ í…Œì´ë¸”
 CREATE TABLE bm_point (
     user_id   NUMBER,
     used_date TIMESTAMP DEFAULT sysdate,
@@ -173,7 +173,7 @@ CREATE TABLE bm_point (
     point     NUMBER NOT NULL
 );
 
--- ¿Ü·¡Å° ÁöÁ¤
+-- ì™¸ë˜í‚¤ ì§€ì •
 ALTER TABLE bm_point
     ADD CONSTRAINT point FOREIGN KEY ( user_id )
         REFERENCES bm_user ( id )
@@ -183,7 +183,7 @@ ALTER TABLE bm_point
 
 
 
--- ¸®ºä Å×ÀÌºí
+-- ë¦¬ë·° í…Œì´ë¸”
 CREATE TABLE bm_review (
     order_num      NUMBER PRIMARY KEY,
     store_id       NUMBER NOT NULL,
@@ -195,7 +195,7 @@ CREATE TABLE bm_review (
     review_img     VARCHAR2(200)
 );
 
--- ¿Ü·¡Å° ÁöÁ¤
+-- ì™¸ë˜í‚¤ ì§€ì •
 ALTER TABLE bm_review
     ADD CONSTRAINT review FOREIGN KEY ( order_num )
         REFERENCES bm_order_user ( order_num )
@@ -205,14 +205,14 @@ ALTER TABLE bm_review
 
 
 
--- ÂòÇÏ±â Å×ÀÌºí
+-- ì°œí•˜ê¸° í…Œì´ë¸”
 CREATE TABLE bm_likes (
     user_id    NUMBER,
     store_id   NUMBER,
     likes_date TIMESTAMP DEFAULT sysdate
 );
 
--- ¿Ü·¡Å° ÁöÁ¤
+-- ì™¸ë˜í‚¤ ì§€ì •
 ALTER TABLE bm_likes
     ADD CONSTRAINT likes_user_id FOREIGN KEY ( user_id )
         REFERENCES bm_user ( id )
@@ -227,7 +227,7 @@ ALTER TABLE bm_likes
 
 
 
--- »óÇ°±Ç Å×ÀÌºí
+-- ìƒí’ˆê¶Œ í…Œì´ë¸”
 CREATE TABLE bm_gift_card (
     gift_card_num VARCHAR2(50) PRIMARY KEY,
     point         NUMBER NOT NULL,
@@ -238,50 +238,50 @@ CREATE TABLE bm_gift_card (
 
 
 
--- °¡°Ô ´õ¹Ì µ¥ÀÌÅÍ Ãß°¡
+-- ê°€ê²Œ ë”ë¯¸ ë°ì´í„° ì¶”ê°€
 INSERT INTO bm_store
-    VALUES (store_id_seq.NEXTVAL, 100, 'µµ¹Ì³ëÇÇÀÚ', '48095', 'ºÎ»ê±¤¿ª½Ã ÇØ¿î´ë±¸', '»ó¼¼ÁÖ¼Ò', '01011112222', '\img\none.gif', '\img\none.gif', 10, 22, 16000, 40, 2000, '°¡°Ô ¼Ò°³');
+    VALUES (store_id_seq.NEXTVAL, 100, 'ë„ë¯¸ë…¸í”¼ì', '48095', 'ë¶€ì‚°ê´‘ì—­ì‹œ í•´ìš´ëŒ€êµ¬', 'ìƒì„¸ì£¼ì†Œ', '01011112222', '\img\none.gif', '\img\none.gif', 10, 22, 16000, 40, 2000, 'ê°€ê²Œ ì†Œê°œ');
 INSERT INTO bm_store
-    VALUES (store_id_seq.NEXTVAL, 100, '¹Ì½ºÅÍÇÇÀÚ', '48095', 'ºÎ»ê±¤¿ª½Ã ÇØ¿î´ë±¸', '»ó¼¼ÁÖ¼Ò', '01012344321', '\img\none.gif', '\img\none.gif', 10, 22, 15000, 50, 2000, '°¡°Ô ¼Ò°³');
+    VALUES (store_id_seq.NEXTVAL, 100, 'ë¯¸ìŠ¤í„°í”¼ì', '48095', 'ë¶€ì‚°ê´‘ì—­ì‹œ í•´ìš´ëŒ€êµ¬', 'ìƒì„¸ì£¼ì†Œ', '01012344321', '\img\none.gif', '\img\none.gif', 10, 22, 15000, 50, 2000, 'ê°€ê²Œ ì†Œê°œ');
 INSERT INTO bm_store
-    VALUES (store_id_seq.NEXTVAL, 100, 'ÇÇÀÚÇê', '48095', 'ºÎ»ê±¤¿ª½Ã ÇØ¿î´ë±¸', '»ó¼¼ÁÖ¼Ò', '01056780123', '\img\none.gif', '\img\none.gif', 10, 22, 16000, 30, 2000, '°¡°Ô ¼Ò°³');
+    VALUES (store_id_seq.NEXTVAL, 100, 'í”¼ìí—›', '48095', 'ë¶€ì‚°ê´‘ì—­ì‹œ í•´ìš´ëŒ€êµ¬', 'ìƒì„¸ì£¼ì†Œ', '01056780123', '\img\none.gif', '\img\none.gif', 10, 22, 16000, 30, 2000, 'ê°€ê²Œ ì†Œê°œ');
 INSERT INTO bm_store
-    VALUES (store_id_seq.NEXTVAL, 100, 'ÇÇÀÚ½ºÄğ', '48095', 'ºÎ»ê±¤¿ª½Ã ÇØ¿î´ë±¸', '»ó¼¼ÁÖ¼Ò', '01098765432', '\img\none.gif', '\img\none.gif', 10, 22, 10000, 40, 2000, '°¡°Ô ¼Ò°³');
+    VALUES (store_id_seq.NEXTVAL, 100, 'í”¼ììŠ¤ì¿¨', '48095', 'ë¶€ì‚°ê´‘ì—­ì‹œ í•´ìš´ëŒ€êµ¬', 'ìƒì„¸ì£¼ì†Œ', '01098765432', '\img\none.gif', '\img\none.gif', 10, 22, 10000, 40, 2000, 'ê°€ê²Œ ì†Œê°œ');
 
--- À½½Ä ´õ¹Ì µ¥ÀÌÅÍ Ãß°¡
+-- ìŒì‹ ë”ë¯¸ ë°ì´í„° ì¶”ê°€
 INSERT INTO bm_food (id, store_id, food_name, food_price, food_dec, food_img, food_thumb)
-    VALUES (food_id_seq.NEXTVAL, 1, 'ºÒ°í±â ÇÇÀÚ', '20000', 'ºÒ°í±â ÇÇÀÚÀÔ´Ï´Ù', '\img\none.gif', '\img\none.gif');
+    VALUES (food_id_seq.NEXTVAL, 1, 'ë¶ˆê³ ê¸° í”¼ì', '20000', 'ë¶ˆê³ ê¸° í”¼ìì…ë‹ˆë‹¤', '\img\none.gif', '\img\none.gif');
 INSERT INTO bm_food (id, store_id, food_name, food_price, food_dec, food_img, food_thumb)
-    VALUES (food_id_seq.NEXTVAL, 1, 'Æ÷Å×ÀÌÅä ÇÇÀÚ', '18000', 'Æ÷Å×ÀÌÅä ÇÇÀÚÀÔ´Ï´Ù', '\img\none.gif', '\img\none.gif');
+    VALUES (food_id_seq.NEXTVAL, 1, 'í¬í…Œì´í†  í”¼ì', '18000', 'í¬í…Œì´í†  í”¼ìì…ë‹ˆë‹¤', '\img\none.gif', '\img\none.gif');
 INSERT INTO bm_food (id, store_id, food_name, food_price, food_dec, food_img, food_thumb)
-    VALUES (food_id_seq.NEXTVAL, 1, '°í±¸¸¶ ÇÇÀÚ', '19000', '°í±¸¸¶ ÇÇÀÚÀÔ´Ï´Ù', '\img\none.gif', '\img\none.gif');
+    VALUES (food_id_seq.NEXTVAL, 1, 'ê³ êµ¬ë§ˆ í”¼ì', '19000', 'ê³ êµ¬ë§ˆ í”¼ìì…ë‹ˆë‹¤', '\img\none.gif', '\img\none.gif');
 INSERT INTO bm_food (id, store_id, food_name, food_price, food_dec, food_img, food_thumb)
-    VALUES (food_id_seq.NEXTVAL, 1, 'ÆäÆÛ·Î´Ï ÇÇÀÚ', '17000', 'ÆäÆÛ·Î´Ï ÇÇÀÚÀÔ´Ï´Ù', '\img\none.gif', '\img\none.gif');
+    VALUES (food_id_seq.NEXTVAL, 1, 'í˜í¼ë¡œë‹ˆ í”¼ì', '17000', 'í˜í¼ë¡œë‹ˆ í”¼ìì…ë‹ˆë‹¤', '\img\none.gif', '\img\none.gif');
 
--- Ãß°¡¿É¼Ç ´õ¹Ì µ¥ÀÌÅÍ Ãß°¡
-INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'Ä¡ÁîÅ©·¯½ºÆ®·Î º¯°æ', 3000);
-INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'ÆÄ½ºÅ¸ Ãß°¡', 4000);
-INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'º£ÀÌÄÁ ÅäÇÎ Ãß°¡', 1000);
-INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'Ä¡Áî ÅäÇÎ Ãß°¡', 1000);
+-- ì¶”ê°€ì˜µì…˜ ë”ë¯¸ ë°ì´í„° ì¶”ê°€
+INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'ì¹˜ì¦ˆí¬ëŸ¬ìŠ¤íŠ¸ë¡œ ë³€ê²½', 3000);
+INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'íŒŒìŠ¤íƒ€ ì¶”ê°€', 4000);
+INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'ë² ì´ì»¨ í† í•‘ ì¶”ê°€', 1000);
+INSERT INTO bm_food_option VALUES (option_id_seq.NEXTVAL, 1, 'ì¹˜ì¦ˆ í† í•‘ ì¶”ê°€', 1000);
 
--- »óÇ°±Ç ´õ¹Ì µ¥ÀÌÅÍ Ãß°¡
-INSERT INTO bm_gift_card VALUES ('appleuser', 50000, '»óÇ°±Ç ÃæÀü');
+-- ìƒí’ˆê¶Œ ë”ë¯¸ ë°ì´í„° ì¶”ê°€
+INSERT INTO bm_gift_card VALUES ('appleuser', 50000, 'ìƒí’ˆê¶Œ ì¶©ì „');
 
 COMMIT;
 
 
---SELECT * FROM bm_food;
---SELECT * FROM bm_food_option;
---SELECT * FROM bm_gift_card;
---SELECT * FROM bm_likes;
---SELECT * FROM bm_order_detail_non_user;
---SELECT * FROM bm_order_detail_user;
---SELECT * FROM bm_order_non_user;
---SELECT * FROM bm_order_user;
---SELECT * FROM bm_point;
---SELECT * FROM bm_review;
---SELECT * FROM bm_store;
---SELECT * FROM bm_user;
+SELECT * FROM bm_food;
+SELECT * FROM bm_food_option;
+SELECT * FROM bm_gift_card;
+SELECT * FROM bm_likes;
+SELECT * FROM bm_order_detail_non_user;
+SELECT * FROM bm_order_detail_user;
+SELECT * FROM bm_order_non_user;
+SELECT * FROM bm_order_user;
+SELECT * FROM bm_point;
+SELECT * FROM bm_review;
+SELECT * FROM bm_store;
+SELECT * FROM bm_user;
 
 --DROP TABLE bm_food CASCADE CONSTRAINTS;
 --DROP TABLE bm_food_option CASCADE CONSTRAINTS;
@@ -295,3 +295,8 @@ COMMIT;
 --DROP TABLE bm_review CASCADE CONSTRAINTS;
 --DROP TABLE bm_store CASCADE CONSTRAINTS;
 --DROP TABLE bm_user CASCADE CONSTRAINTS;
+
+--DROP SEQUENCE user_id_seq;
+--DROP SEQUENCE store_id_seq;
+--DROP SEQUENCE food_id_seq;
+--DROP SEQUENCE option_id_seq;
