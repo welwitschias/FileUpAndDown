@@ -1,0 +1,20 @@
+CREATE TABLE dl_user (
+    id       NUMBER PRIMARY KEY,
+    username VARCHAR2(100) NOT NULL,
+    password VARCHAR2(100) NOT NULL,
+    email    VARCHAR2(50),
+    nickname VARCHAR2(50),
+    point    NUMBER DEFAULT 0,
+    phone    VARCHAR2(20),
+    rating   VARCHAR2(50) DEFAULT 0,
+    role     VARCHAR2(20) DEFAULT 'ROLE_USER'
+);
+
+-- 시퀀스(USER 테이블의 ID 자동생성)
+CREATE SEQUENCE user_id_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 99999999999 NOCYCLE NOCACHE NOORDER;
+
+COMMIT;
+
+SELECT * FROM dl_user;
+--DROP SEQUENCE user_id_seq;
+--DROP TABLE dl_user CASCADE CONSTRAINTS;
