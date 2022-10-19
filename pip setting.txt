@@ -1,0 +1,24 @@
+anaconda prompt 실행
+
+* 설치 확인 *
+pip list
+
+* 설치 하기 *
+pip install selenium
+pip install webdriver-manager
+pip install pymysql
+pip install wordcloud
+pip install koNLPy
+pip install folium
+
+*** 파이썬 내부에서 nltk.download() ***
+
+
+* selenium 관련
+https://chromedriver.storage.googleapis.com/index.html?path=106.0.5249.61/ [접속]
+-> chromedriver_win32.zip [다운로드]
+
+
+* konlpy 관련
+cd [경로] 입력
+pip install JPype1-1.4.0-cp38-cp38-win_amd64.whl
